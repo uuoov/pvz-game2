@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>植物大战僵尸</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #1a1a2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        #gameContainer {
+            position: relative;
+            border: 3px solid #333;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        canvas { display: block; cursor: pointer; }
+        #startScreen, #endScreen {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0,0,0,0.85);
+            z-index: 10;
+            color: white;
+        }
+        #endScreen { display: none; }
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4CAF50;
+            text-shadow: 3px 3px 0 #2E7D32, 0 0 20px rgba(76,175,80,0.5);
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 24px;
+            color: #FF9800;
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 0 #E65100;
+        }
+        .btn {
+            padding: 15px 50px;
+            font-size: 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            font-weight: bold;
+        }
+        .btn:hover { transform: scale(1.08); }
+        .btn-start {
+            background: linear-gradient(180deg, #66BB6A, #388E3C);
+            color: white;
+            box-shadow: 0 4px 0 #1B5E20, 0 0 15px rgba(76,175,80,0.3);
+        }
+        .btn-restart {
+            background: linear-gradient(180deg, #FFB74D, #F57C00);
+            color: white;
+            box-shadow: 0 4px 0 #E65100;
+        }
+        .end-msg { font-size: 36px; margin-bottom: 20px; }
+        .score-msg { font-size: 22px; color: #aaa; margin-bottom: 30px; }
+        .instructions {
+            font-size: 14px;
+            color: #888;
+            max-width: 500px;
+            text-align: center;
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        <div id="startScreen">
+            <div class="title">植物大战僵尸</div>
+            <div class="subtitle">Plants vs. Zombies</div>
+            <button class="btn btn-start" onclick="startGame()">开始游戏</button>
+            <div class="instructions">
+                点击卡片选择植物，点击草坪种植<br>
+                收集掉落的阳光来购买植物<br>
+                阻止僵尸到达左边界！<br><br>
+                向日葵: 产生阳光 | 豌豆射手: 发射子弹<br>
+                寒冰射手: 减速僵尸 | 坚果墙: 高血量防御
+            </div>
+        </div>
+        <div id="endScreen">
+            <div class="end-msg" id="endMsg"></div>
+            <div class="score-msg" id="scoreMsg"></div>
+            <button class="btn btn-restart" onclick="startGame()">再来一次</button>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
